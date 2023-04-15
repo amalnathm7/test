@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:r_quiz/screens/quizz_screen.dart';
-import 'package:r_quiz/ui/shared/color.dart';
+import '/screens/quizz_screen.dart';
+import '/ui/shared/color.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);

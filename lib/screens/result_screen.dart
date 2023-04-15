@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:r_quiz/screens/main_menu.dart';
-import 'package:r_quiz/ui/shared/color.dart';
+import '/screens/main_menu.dart';
+import '/ui/shared/color.dart';
 
 class ResultScreen extends StatefulWidget {
   int score;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:r_quiz/data/questions_example.dart';
-import 'package:r_quiz/screens/result_screen.dart';
-import 'package:r_quiz/ui/shared/color.dart';
-import 'package:r_quiz/widgets/quizz_widget.dart';
-import 'package:r_quiz/model/question_model.dart';
+import '/data/questions_example.dart';
+import '/screens/result_screen.dart';
+import '/ui/shared/color.dart';
+import '/widgets/quizz_widget.dart';
+import '/model/question_model.dart';
 
 class QuizzScreen extends StatefulWidget {
   const QuizzScreen({Key? key}) : super(key: key);
