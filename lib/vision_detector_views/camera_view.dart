@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +10,14 @@ import '../main.dart';
 enum ScreenMode { liveFeed, gallery }
 
 class CameraView extends StatefulWidget {
-  CameraView(
+  const CameraView(
       {Key? key,
       required this.title,
       required this.customPaint,
       this.text,
       required this.onImage,
       this.onScreenModeChanged,
-      this.initialDirection = CameraLensDirection.back})
+      this.initialDirection = CameraLensDirection.front})
       : super(key: key);
 
   final String title;
@@ -85,11 +84,13 @@ class _CameraViewState extends State<CameraView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.black,
+        shadowColor: Colors.black,
         actions: [
           if (_allowPicker)
             Padding(
-              padding: EdgeInsets.only(right: 20.0),
+              padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: _switchScreenMode,
                 child: Icon(
@@ -105,7 +106,7 @@ class _CameraViewState extends State<CameraView> {
       ),
       body: _body(),
       floatingActionButton: _floatingActionButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 
@@ -113,15 +114,15 @@ class _CameraViewState extends State<CameraView> {
     if (_mode == ScreenMode.gallery) return null;
     if (cameras.length == 1) return null;
     return SizedBox(
-        height: 70.0,
-        width: 70.0,
+        height: 50.0,
+        width: 50.0,
         child: FloatingActionButton(
           onPressed: _switchLiveCamera,
           child: Icon(
             Platform.isIOS
                 ? Icons.flip_camera_ios_outlined
                 : Icons.flip_camera_android_outlined,
-            size: 40,
+            size: 30,
           ),
         ));
   }
@@ -160,15 +161,15 @@ class _CameraViewState extends State<CameraView> {
             scale: scale,
             child: Center(
               child: _changingCameraLens
-                  ? Center(
-                      child: const Text('Changing camera lens'),
+                  ? const Center(
+                      child: Text('Changing camera lens'),
                     )
                   : CameraPreview(_controller!),
             ),
           ),
           if (widget.customPaint != null) widget.customPaint!,
           Positioned(
-            bottom: 100,
+            bottom: 20,
             left: 50,
             right: 50,
             child: Slider(
@@ -205,21 +206,21 @@ class _CameraViewState extends State<CameraView> {
                 ],
               ),
             )
-          : Icon(
+          : const Icon(
               Icons.image,
               size: 200,
             ),
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ElevatedButton(
-          child: Text('From Gallery'),
+          child: const Text('From Gallery'),
           onPressed: () => _getImage(ImageSource.gallery),
         ),
       ),
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ElevatedButton(
-          child: Text('Take a picture'),
+          child: const Text('Take a picture'),
           onPressed: () => _getImage(ImageSource.camera),
         ),
       ),

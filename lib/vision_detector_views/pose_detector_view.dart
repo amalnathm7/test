@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
+import 'package:r_quiz/main.dart';
 
 import 'camera_view.dart';
 import 'painters/pose_painter.dart';
 
 class PoseDetectorView extends StatefulWidget {
+  const PoseDetectorView({super.key});
+
   @override
   State<StatefulWidget> createState() => _PoseDetectorViewState();
 }
@@ -46,15 +49,32 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
     });
     final poses = await _poseDetector.processImage(inputImage);
 
-    // printing left eye x cordinate
+    // printing left eye y coordinate
 
     for (Pose pose in poses) {
-      
       final landmark = pose.landmarks[PoseLandmarkType.leftEye];
-      final leftEyeX = landmark?.x;
-      print('Left eye:');
-      print(leftEyeX);
+      final leftEyeY = landmark?.y;
 
+      print(leftEyeY);
+
+      if (leftEyeY != null) {
+        if (leftEyeY > 1000) {
+          changer.btnPressed = changer.selectedOpt;
+          changer.notify();
+        } else if (leftEyeY < 300) {
+          changer.selectedOpt = 0;
+          changer.notify();
+        } else if (leftEyeY < 400) {
+          changer.selectedOpt = 1;
+          changer.notify();
+        } else if (leftEyeY < 500) {
+          changer.selectedOpt = 2;
+          changer.notify();
+        } else if (leftEyeY < 600) {
+          changer.selectedOpt = 3;
+          changer.notify();
+        }
+      }
     }
 
     if (inputImage.inputImageData?.size != null &&
